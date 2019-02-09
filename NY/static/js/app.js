@@ -1,16 +1,11 @@
-// queue()
-//     .defer(d3.json, "/Alldata")
-//     .await(buildPlot);
-
+// creating connection to our DB
+// Creating a Crossfilter instance:
 d3.json("/Alldata", (function (data) {
         console.log(data);
         var ny = crossfilter(data);
         var all = ny.groupAll();
-             
-
-
-
-
+           
+// Defining data dimension for the interactivity
 var sexTypeDim = ny.dimension(function (d){ return d.Sex; });
 var LeadingTypeDim = ny.dimension(function (d){ return d.LeadingCause; });
 var YearTypeDim = ny.dimension(function (d){ return d.Year; });
@@ -18,8 +13,7 @@ var RaceEthnicityTypeDim = ny.dimension(function (d){ return d.RaceEthnicity; })
 var DeathsTypeDim = ny.dimension(function (d){ return d.Deaths; });
 // var AgeAdjustedDeathRateTypeDim = ny.dimension(function (d){ return d.AgeAdjustedDeathRate; });
 
-
-
+// Defining Data group
 
 var sexTypeGroup = sexTypeDim.group()
 .reduceCount(function(d){return d.Sex;});
@@ -39,7 +33,7 @@ var DeathsTypeGroup = DeathsTypeDim.group()
 // var AgeAdjustedDeathRateTypeGroup = AgeAdjustedDeathRateTypeDim.group()
 // .reduceCount(function(d){return d.Deaths;});
 
-
+Defining DC Charts:
 
 var LeadingTypeChart = dc.rowChart("#LeadingType");
 var SexTypeChart = dc.rowChart("#SexType");
@@ -85,5 +79,3 @@ dc.renderAll();
 
     }));
 
-// buildCharts();
-// }
