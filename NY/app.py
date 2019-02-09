@@ -1,4 +1,4 @@
-# 1. import Flask
+
 import os
 
 import pandas as pd
@@ -54,7 +54,7 @@ def names():
     stmt = db.session.query(Leading_Death).statement
     df = pd.read_sql_query(stmt, db.session.bind)
 
-    # Return a list of the column names (sample names)
+    # Return a list of the column names
     return jsonify(list(df.columns)[2:])
 
 # reflect an existing database into a new model
@@ -75,7 +75,7 @@ def index():
 @app.route("/Alldata")
 def Alldata():
     """Return a list of all data"""
-    # Query all passengerscause of death
+    # Query all record from database
     Leading_Death = Base.classes.Leading_Death
     results = db.session.query(Leading_Death)
 
